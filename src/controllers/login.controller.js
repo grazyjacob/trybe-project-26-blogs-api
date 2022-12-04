@@ -1,4 +1,4 @@
-const UserService = require('../services/userService');
+const UserService = require('../services/loginService');
 require('dotenv/config');
 
 const verify = async (req, res) => {
