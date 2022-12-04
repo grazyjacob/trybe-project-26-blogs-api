@@ -1,6 +1,5 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const posts_categories = sequelize.init({
+  const postsCategories = sequelize.define('PostsCategories', {
     post_id: DataTypes.INTEGER,
     category_id: DataTypes.INTEGER
   }, {
@@ -8,5 +7,5 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'posts_categories',
     underscored: true,
   });
-  return posts_categories;
+  return postsCategories;
 };

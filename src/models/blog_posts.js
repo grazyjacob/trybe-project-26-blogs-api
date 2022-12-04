@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-const blog_posts = sequelize.init({
+const blogPosts = sequelize.define('BlogPosts', {
     title: DataTypes.STRING,
     content: DataTypes.STRING,
     user_id: DataTypes.INTEGER,
@@ -11,5 +11,5 @@ const blog_posts = sequelize.init({
     modelName: 'blog_posts',
     underscored: true,
   });
-  return blog_posts;
+  return blogPosts;
 };
