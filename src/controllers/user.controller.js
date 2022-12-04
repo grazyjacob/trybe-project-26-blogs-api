@@ -19,17 +19,18 @@ const verify = async ({ displayName, email, password }) => {
 const postUser = async (req, res) => {
     const { displayName, email, password } = req.body;
     const byEmail = await UserService.getByEmail(email);
-    if (byEmail === null) {
+    // se o byEmail procurar e retornar null quer dizer que n tem esse email no db
+    if (byEmail) {
+        return res.status(409).json({
+            message: 'User already registered',
+          }); 
+        }
         const verifyFields = await verify({ displayName, email, password });
         if (verifyFields.type) {
             return res.status(400).json({ message: verifyFields.message });
         }
-        const { token } = await UserService.createUser(displayName, email, password);
+        const { token } = await UserService.createUser({ displayName, email, password });
         return res.status(201).json({ token });
-    }
-      return res.status(409).json({
-        message: 'User already registered',
-      });
 };
 
 module.exports = {
