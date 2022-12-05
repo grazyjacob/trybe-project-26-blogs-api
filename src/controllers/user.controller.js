@@ -19,7 +19,6 @@ const verify = async ({ displayName, email, password }) => {
 const postUser = async (req, res) => {
     const { displayName, email, password } = req.body;
     const byEmail = await UserService.getByEmail(email);
-    // se o byEmail procurar e retornar null quer dizer que n tem esse email no db
     if (byEmail) {
         return res.status(409).json({
             message: 'User already registered',
@@ -33,6 +32,12 @@ const postUser = async (req, res) => {
         return res.status(201).json({ token });
 };
 
+const getUser = async (_req, res) => {
+    const users = await UserService.getUsers();
+    res.status(200).json(users);
+};
+
 module.exports = {
     postUser,
+    getUser,
 };
