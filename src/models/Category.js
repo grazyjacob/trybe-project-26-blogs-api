@@ -7,5 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'categories',
     underscored: true,
   });
+
   return categories;
 };
