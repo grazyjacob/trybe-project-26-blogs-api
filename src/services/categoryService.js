@@ -7,7 +7,10 @@ const postCategory = async ({ name }) => {
 
 const getByName = async (name) => Category.findOne({ where: { name } });
 
+const getCategory = async () => Category.findAll();
+
 module.exports = {
     postCategory,
     getByName,
+    getCategory,
 };
