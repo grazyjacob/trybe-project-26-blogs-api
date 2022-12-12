@@ -14,13 +14,21 @@ const getAllPosts = async (_req, res) => {
 const getById = async (req, res) => {
   const { id } = req.params;
   const result = await postService.getOneById(id);
-  console.log('CONTROLLER GET BY ID', result);
   if (result) return res.status(200).json(result);
   return res.status(404).json({ message: 'Post does not exist' });
+};
+
+const updatePostById = async (req, res) => {
+  const { title, content } = req.body;
+  const { id } = req.params;
+  const result = await postService.updatePost({ id, title, content });
+  if (result) return res.status(200).json(result);
+  return res.status(401).json(result);
 };
 
 module.exports = {
   createPost,
   getAllPosts,
   getById,
+  updatePostById,
 };
