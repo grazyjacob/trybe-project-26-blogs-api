@@ -8,7 +8,6 @@ const createPost = async (req, res) => {
 
 const getAllPosts = async (_req, res) => {
   const result = await postService.getAllPost();
-  console.log('CONTROOLER', result);
   return res.status(200).json(result);
 };
 
