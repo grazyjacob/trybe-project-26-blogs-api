@@ -4,7 +4,7 @@ const validateToken = require('../middlewares/validate.token');
 
 const router = express.Router();
 
-router.post('/post', postController.createPost);
+router.post('/post', validateToken, postController.createPost);
 router.get('/post', validateToken, postController.getAllPosts);
 
 module.exports = router;
