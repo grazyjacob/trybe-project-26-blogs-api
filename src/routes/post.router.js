@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.post('/post', validateToken, postController.createPost);
 router.get('/post', validateToken, postController.getAllPosts);
+router.get('/post/:id', validateToken, postController.getById);
 
 module.exports = router;
