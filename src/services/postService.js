@@ -27,8 +27,14 @@ const getOneById = async (id) => {
  return result;
 };
 
-const updatePost = async ({ id, title, content }) => {
- const result = await BlogPost.update({ title, content }, { where: { id } });
+const updatePost = async (id, title, content) => {
+ const result = await BlogPost.update({ title, content }, { where: { id } },
+    { include: [{
+    model: User,
+    as: 'user',
+    attributes: { exclude: ['password'] },
+}, { model: Category, as: 'categories', through: { attributes: [] } }],
+});
  return result;
 };
 
