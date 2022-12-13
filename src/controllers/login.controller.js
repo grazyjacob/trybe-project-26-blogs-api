@@ -1,4 +1,7 @@
 const UserService = require('../services/loginService');
+// const { User } = require('../models');
+const { createToken } = require('../auth/jwtFunctions');
+
 require('dotenv/config');
 
 const verify = async (req, res) => {
@@ -14,13 +17,15 @@ return null;
 const postLogin = async (req, res) => {
     const { email, password } = req.body;
     const verifyFields = await verify(req, res);
+    const byEmail = await UserService.getByEmail(email);
     if (verifyFields) return verifyFields;
     const byPassword = await UserService.getByPassword(password);
-    const byEmail = await UserService.getByEmail(email);
     if (byEmail === null || byPassword === null) {
       return res.status(400).json({ message: 'Invalid fields' });
     }
-      const { token } = await UserService.createUser(email, password);
+    console.log('POST LOGIN CONTROLLER', byEmail.displayName);
+    const user = [byEmail.displayName, byEmail.email, byEmail.image]; 
+    const token = createToken(user);
       return res
       .status(200)
       .json({ token });
