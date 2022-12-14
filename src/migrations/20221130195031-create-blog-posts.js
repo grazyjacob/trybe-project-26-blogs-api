@@ -26,14 +26,14 @@ module.exports = {
         },
       },
       published: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updated: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
-    });
+    }, { timestamps: false });
   },
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface, _Sequelize) => {
     await queryInterface.dropTable('blog_posts');
   }
 };

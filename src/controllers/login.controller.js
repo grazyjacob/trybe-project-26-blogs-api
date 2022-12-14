@@ -1,4 +1,4 @@
-const UserService = require('../services/loginService');
+const LoginService = require('../services/loginService');
 require('dotenv/config');
 
 const verify = async (req, res) => {
@@ -13,14 +13,14 @@ return null;
 
 const postLogin = async (req, res) => {
     const { email, password } = req.body;
-    const verifyFields = await verify(req, res);
-    if (verifyFields) return verifyFields;
-    const byPassword = await UserService.getByPassword(password);
-    const byEmail = await UserService.getByEmail(email);
+    const isEmptyFields = await verify(req, res);
+    if (isEmptyFields) return isEmptyFields;
+    const byPassword = await LoginService.getByPassword(password);
+    const byEmail = await LoginService.getByEmail(email);
     if (byEmail === null || byPassword === null) {
       return res.status(400).json({ message: 'Invalid fields' });
     }
-      const { token } = await UserService.createUser(email, password);
+      const { token } = await LoginService.checkUser(email);
       return res
       .status(200)
       .json({ token });

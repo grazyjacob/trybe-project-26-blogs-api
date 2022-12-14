@@ -9,10 +9,10 @@ const app = express();
 
 app.use(express.json());
 
+app.use('/', postRoutes);
 app.use('/', loginRoutes);
 app.use('/', userRoutes);
 app.use('/', categoryRoutes);
-app.use('/', postRoutes);
 // ...
 
 // É importante exportar a constante `app`,
